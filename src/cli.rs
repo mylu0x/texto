@@ -1,5 +1,7 @@
 use clap::{Parser, Subcommand};
 
+use crate::commands::{self, text::Lang};
+
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
 struct Cli {
@@ -8,11 +10,24 @@ struct Cli {
 }
 
 #[derive(Debug, Subcommand)]
-enum Commands {
-    /// Just a test command.
-    Hello {
+enum Commands {    
+    /// Generate dummy text.
+    Text {
+        /// Number of words to generate
+        #[arg(short, long, default_value_t = 16)]
+        words: usize,
+        
+        /// Number of texts to generate
+        #[arg(short, long, default_value_t = 1)]
+        count: usize,
+        
+        /// Generate texts with words in random order
         #[arg(short, long)]
-        name: String
+        random: bool,
+        
+        /// Language to generate texts
+        #[arg(short, long)]
+        lang: Option<Lang>
     }
 }
 
@@ -20,9 +35,7 @@ pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
     match &cli.command {
-        Commands::Hello { name } => {
-            println!("Hello, {}!", name);
-        }
+        Commands::Text { words, count, random, lang } => commands::text::run(*words, *count, *random, lang.clone())?
     }
     
     Ok(())

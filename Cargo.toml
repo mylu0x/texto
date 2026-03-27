@@ -9,3 +9,4 @@ repository = "https://github.com/mylu0x/texto"
 [dependencies]
 anyhow = "1.0.102"
 clap = { version = "4.6.0", features = ["derive"] }
+fastrand = "2.3.0"
