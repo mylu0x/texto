@@ -5,8 +5,14 @@ const WORD_SET_EN: &[&str] = &[
     "I", "want", "to", "drink", "water", "it", "is", "rainy", "here"
 ];
 
-pub fn run(words: usize) -> anyhow::Result<()> {
-    println!("{}", generate_text(WORD_SET_EN, words));
+pub fn run(words: usize, count: usize) -> anyhow::Result<()> {
+    let mut results: Vec<String> = Vec::with_capacity(count);
+    
+    for _ in 0..count {
+        results.push(generate_text(WORD_SET_EN, words));
+    }
+    
+    println!("{}", results.join("\n\n"));
     Ok(())
 }
 

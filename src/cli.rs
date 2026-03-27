@@ -15,7 +15,11 @@ enum Commands {
     Text {
         /// Number of words to generate (defaults to 16)
         #[arg(short, long, default_value_t = 16)]
-        words: usize
+        words: usize,
+        
+        /// Number of texts to generate (defaults to 1)
+        #[arg(short, long, default_value_t = 1)]
+        count: usize
     }
 }
 
@@ -23,7 +27,7 @@ pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
     match &cli.command {
-        Commands::Text { words } => commands::text::run(*words)?
+        Commands::Text { words, count } => commands::text::run(*words, *count)?
     }
     
     Ok(())
