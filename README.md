@@ -17,16 +17,16 @@ Download the latest binary from [Releases](https://github.com/mylu0x/texto/relea
 ## Usage
 ```bash
 # Generate words (16 words, English) 
-tekst text
+texto text
 
 # Generate 100 words
-tekst text -w 100
+texto text -w 100
 
 # Generate 10 words in German
-tekst text -l de
+texto text -l de
 
 # Generate 100 words three times
-tekst text -w 100 -c 3
+texto text -w 100 -c 3
 ```
 
 ## License
