@@ -2,6 +2,7 @@
 name = "texto"
 version = "0.1.0"
 edition = "2024"
+description = "Tekst is a CLI made for generating dummy text."
 
 [dependencies]
 anyhow = "1.0.102"
