@@ -10,13 +10,7 @@ struct Cli {
 }
 
 #[derive(Debug, Subcommand)]
-enum Commands {
-    /// Just a test command.
-    Hello {
-        #[arg(short, long)]
-        name: String
-    },
-    
+enum Commands {    
     /// Generate dummy text.
     Text {}
 }
@@ -25,9 +19,6 @@ pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
     match &cli.command {
-        Commands::Hello { name } => {
-            println!("Hello, {}!", name);
-        },
         Commands::Text {  } => commands::text::run()?
     }
     
