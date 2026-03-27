@@ -12,14 +12,18 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 enum Commands {    
     /// Generate dummy text.
-    Text {}
+    Text {
+        /// Number of words to generate (defaults to 16)
+        #[arg(short, long, default_value_t = 16)]
+        words: usize
+    }
 }
 
 pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
     match &cli.command {
-        Commands::Text {  } => commands::text::run()?
+        Commands::Text { words } => commands::text::run(*words)?
     }
     
     Ok(())
