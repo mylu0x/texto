@@ -19,7 +19,11 @@ enum Commands {
         
         /// Number of texts to generate (defaults to 1)
         #[arg(short, long, default_value_t = 1)]
-        count: usize
+        count: usize,
+        
+        /// Generate texts with words in random order
+        #[arg(short, long)]
+        random: bool
     }
 }
 
@@ -27,7 +31,7 @@ pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
     match &cli.command {
-        Commands::Text { words, count } => commands::text::run(*words, *count)?
+        Commands::Text { words, count, random } => commands::text::run(*words, *count, *random)?
     }
     
     Ok(())
