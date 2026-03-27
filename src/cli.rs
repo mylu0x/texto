@@ -1,5 +1,7 @@
 use clap::{Parser, Subcommand};
 
+use crate::commands;
+
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
 struct Cli {
@@ -13,7 +15,10 @@ enum Commands {
     Hello {
         #[arg(short, long)]
         name: String
-    }
+    },
+    
+    /// Generate dummy text.
+    Text {}
 }
 
 pub fn run() -> anyhow::Result<()> {
@@ -22,7 +27,8 @@ pub fn run() -> anyhow::Result<()> {
     match &cli.command {
         Commands::Hello { name } => {
             println!("Hello, {}!", name);
-        }
+        },
+        Commands::Text {  } => commands::text::run()?
     }
     
     Ok(())
