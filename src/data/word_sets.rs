@@ -32,3 +32,31 @@ pub(crate) const WORD_SET_ES: &[&str] = &[
     "vamos", "a", "probar", "algo", "nuevo", "qué", "es", "esto",
     "quiero", "beber", "agua", "aquí", "está", "lloviendo"
 ];
+
+pub(crate) const WORD_SET_NO: &[&str] = &[
+    "hei", "hvordan", "har", "du", "i", "dag", "jeg", "er", "bra",
+    "hvordan", "med", "deg", "dette", "er", "bra", "jeg", "tror", "dette", "ser", "bra", 
+    "la", "oss", "prøve", "noe", "nytt", "hva", "er", "dette",
+    "jeg", "vil", "drikke", "vann", "det", "er", "regnfullt", "her"
+];
+
+pub(crate) const WORD_SET_RU: &[&str] = &[
+    "привет", "как", "ты", "сегодня", "я", "чувствую", "хорошо",
+    "как", "насчет", "тебя", "это", "хорошо", "я", "думаю", "это", "выглядит", "хорошо",
+    "давай", "попробуем", "что-то", "новое", "что", "это",
+    "я", "хочу", "пить", "воду", "это", "дождливо", "здесь"
+];
+
+pub(crate) const WORD_SET_PL: &[&str] = &[
+    "cześć", "jak", "się", "masz", "dzisiaj", "ja", "mam", "się", "dobrze",
+    "jak", "a", "ty", "to", "jest", "dobrze", "ja", "myślę", "to", "wygląda", "dobrze",
+    "zróbmy", "spróbujmy", "coś", "nowego", "co", "to",
+    "ja", "chcę", "pić", "wodę", "to", "jest", "deszczowo", "tutaj"
+];
+
+pub(crate) const WORD_SET_IT: &[&str] = &[
+    "ciao", "come", "stai", "oggi", "io", "sto", "bene",
+    "come", "va", "con", "te", "questo", "è", "buono", "io", "penso", "questo", "sembra", "buono",
+    "proviamo", "qualcosa", "di", "nuovo", "che", "è", "questo",
+    "io", "voglio", "bere", "acqua", "è", "piovoso", "qui"
+];

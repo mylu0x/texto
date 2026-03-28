@@ -2,7 +2,7 @@ use clap::ValueEnum;
 use crate::data::word_sets::*;
 
 #[derive(Debug, Clone, ValueEnum, PartialEq, Copy)]
-pub enum Lang { En, Ja, De, Fr, Es }
+pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It }
 
 pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>) -> anyhow::Result<()> {
     let mut results: Vec<String> = Vec::with_capacity(count);
@@ -22,7 +22,11 @@ fn generate_text(words: usize, random: bool, lang: Lang) -> String {
         Lang::Ja => WORD_SET_JA,
         Lang::De => WORD_SET_DE,
         Lang::Fr => WORD_SET_FR,
-        Lang::Es => WORD_SET_ES
+        Lang::Es => WORD_SET_ES,
+        Lang::No => WORD_SET_NO,
+        Lang::Ru => WORD_SET_RU,
+        Lang::Pl => WORD_SET_PL,
+        Lang::It => WORD_SET_IT
     };
     
     let separator = if lang == Lang::Ja { "" } else { " " };
