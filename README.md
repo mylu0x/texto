@@ -27,6 +27,15 @@ texto text -l de
 
 # Generate 100 words three times
 texto text -w 100 -c 3
+
+# Generate an array with strings in JSON format
+texto text -f json -c 2
+
+# Generate Lorem Ipsum
+texto lorem
+
+# Generate Lorem Ipsum with 10 words
+texto lorem -w 10
 ```
 
 ## License
