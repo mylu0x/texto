@@ -5,7 +5,7 @@ use crate::data::word_sets::*;
 pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It }
 
 #[derive(Debug, Clone, ValueEnum, Copy)]
-pub enum Format { Plain, Html }
+pub enum Format { Plain, Html, Json }
 
 pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format) -> anyhow::Result<()> {
     let mut results: Vec<String> = Vec::with_capacity(count);
@@ -21,6 +21,9 @@ pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format:
         },
         Format::Html => {
             results.iter().map(|item| { format!("<p>{}</p>", item) }).collect::<Vec<String>>().join("\n\n")
+        },
+        Format::Json => {            
+            format!("[{}]", results.iter().map(|item| { format!("\"{}\"", item) }).collect::<Vec<String>>().join(", "))
         }
     };
     
