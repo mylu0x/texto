@@ -31,7 +31,11 @@ enum Commands {
     },
     
     /// Generate Lorem Ipsum.
-    Lorem {}
+    Lorem {
+        /// Number of words to generate
+        #[arg(short, long, default_value_t = 19)]
+        words: usize
+    }
 }
 
 pub fn run() -> anyhow::Result<()> {
@@ -39,7 +43,7 @@ pub fn run() -> anyhow::Result<()> {
     
     match &cli.command {
         Commands::Text { words, count, random, lang } => commands::text::run(*words, *count, *random, lang.clone())?,
-        Commands::Lorem {  } => commands::lorem::run()?
+        Commands::Lorem { words } => commands::lorem::run(*words)?
     }
     
     Ok(())
