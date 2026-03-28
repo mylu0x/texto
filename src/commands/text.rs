@@ -16,15 +16,9 @@ pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format:
     }
     
     let result: String = match format {
-        Format::Plain => {
-            results.join("\n\n")
-        },
-        Format::Html => {
-            results.iter().map(|item| { format!("<p>{}</p>", item) }).collect::<Vec<String>>().join("\n\n")
-        },
-        Format::Json => {            
-            format!("[{}]", results.iter().map(|item| { format!("\"{}\"", item) }).collect::<Vec<String>>().join(", "))
-        }
+        Format::Plain => results.join("\n\n"),
+        Format::Html => results.iter().map(|item| { format!("<p>{}</p>", item) }).collect::<Vec<String>>().join("\n\n"),
+        Format::Json => format!("[{}]", results.iter().map(|item| { format!("\"{}\"", item) }).collect::<Vec<String>>().join(", "))
     };
     
     println!("{}", result);
