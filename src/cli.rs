@@ -30,7 +30,7 @@ enum Commands {
         lang: Option<Lang>,
         
         /// Format to generate
-        #[arg(short, long, default_value = "Plain")]
+        #[arg(short, long, default_value = "plain")]
         format: Format
     },
     

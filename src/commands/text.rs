@@ -15,7 +15,16 @@ pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format:
         results.push(generate_text(words, random, actual_lang));
     }
     
-    println!("{}", results.join("\n\n"));
+    let result: String = match format {
+        Format::Plain => {
+            results.join("\n\n")
+        },
+        Format::Html => {
+            results.iter().map(|item| { format!("<p>{}</p>", item) }).collect::<Vec<String>>().join("\n\n")
+        }
+    };
+    
+    println!("{}", result);
     Ok(())
 }
 
