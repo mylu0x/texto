@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
 
-use crate::commands::{self, text::Lang};
+use crate::commands::{self, text::{Format, Lang}};
 
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
@@ -27,7 +27,11 @@ enum Commands {
         
         /// Language to generate texts
         #[arg(short, long)]
-        lang: Option<Lang>
+        lang: Option<Lang>,
+        
+        /// Format to generate
+        #[arg(short, long, default_value = "Plain")]
+        format: Format
     },
     
     /// Generate Lorem Ipsum.
@@ -42,7 +46,7 @@ pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
     match &cli.command {
-        Commands::Text { words, count, random, lang } => commands::text::run(*words, *count, *random, lang.clone())?,
+        Commands::Text { words, count, random, lang, format } => commands::text::run(*words, *count, *random, lang.clone(), format.clone())?,
         Commands::Lorem { words } => commands::lorem::run(*words)?
     }
     

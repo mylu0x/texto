@@ -4,7 +4,10 @@ use crate::data::word_sets::*;
 #[derive(Debug, Clone, ValueEnum, PartialEq, Copy)]
 pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It }
 
-pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>) -> anyhow::Result<()> {
+#[derive(Debug, Clone, ValueEnum, Copy)]
+pub enum Format { Plain, Html }
+
+pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format) -> anyhow::Result<()> {
     let mut results: Vec<String> = Vec::with_capacity(count);
     let actual_lang = lang.unwrap_or(Lang::En);
     
