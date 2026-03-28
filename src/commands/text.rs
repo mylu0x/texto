@@ -4,7 +4,10 @@ use crate::data::word_sets::*;
 #[derive(Debug, Clone, ValueEnum, PartialEq, Copy)]
 pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It }
 
-pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>) -> anyhow::Result<()> {
+#[derive(Debug, Clone, ValueEnum, Copy)]
+pub enum Format { Plain, Html, Json }
+
+pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format) -> anyhow::Result<()> {
     let mut results: Vec<String> = Vec::with_capacity(count);
     let actual_lang = lang.unwrap_or(Lang::En);
     
@@ -12,7 +15,13 @@ pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>) -> anyh
         results.push(generate_text(words, random, actual_lang));
     }
     
-    println!("{}", results.join("\n\n"));
+    let result: String = match format {
+        Format::Plain => results.join("\n\n"),
+        Format::Html => results.iter().map(|item| { format!("<p>{}</p>", item) }).collect::<Vec<String>>().join("\n\n"),
+        Format::Json => format!("[{}]", results.iter().map(|item| { format!("\"{}\"", item) }).collect::<Vec<String>>().join(", "))
+    };
+    
+    println!("{}", result);
     Ok(())
 }
 
