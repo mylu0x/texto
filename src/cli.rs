@@ -11,9 +11,11 @@ struct Cli {
     #[command(subcommand)]
     command: Commands,
     
+    /// Output the result to a file
     #[arg(short, long, global = true)]
     output: Option<PathBuf>,
     
+    /// Force overwrite if the output file already exists
     #[arg(long, global = true)]
     force: bool
 }
