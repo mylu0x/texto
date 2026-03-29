@@ -26,9 +26,8 @@ pub fn run(version: UuidVersion, count: usize, case: Case) -> anyhow::Result<Str
 }
 
 fn generate_uuid(version: UuidVersion) -> Uuid {
-    let result = match version {
+    match version {
         UuidVersion::V4 => Uuid::new_v4(),
         UuidVersion::V7 => Uuid::now_v7()
-    };
-    result
+    }
 }
