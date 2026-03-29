@@ -36,6 +36,15 @@ texto lorem
 
 # Generate Lorem Ipsum with 10 words
 texto lorem -w 10
+
+# Generate a UUID (Default: Version 6)
+texto uuid
+
+# Generate a v7 UUID
+texto uuid -v v7
+
+# Save 10 UUIDs to uuids.txt
+texto uuid -c 10 -o "uuids.txt"
 ```
 
 ## License
