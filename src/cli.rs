@@ -12,7 +12,10 @@ struct Cli {
     command: Commands,
     
     #[arg(short, long, global = true)]
-    output: Option<PathBuf>
+    output: Option<PathBuf>,
+    
+    #[arg(long, global = true)]
+    force: bool
 }
 
 #[derive(Debug, Subcommand)]
@@ -72,14 +75,18 @@ pub fn run() -> anyhow::Result<()> {
     }?;
     
     if let Some(path) = cli.output {        
-        if path.exists() {
+        if path.exists() && !cli.force { // File already exists AND --force
             print!("File {} already exists. Overwrite? [y/N] ", path.display());
             stdout().flush()?;
             
             let mut choice = String::new();
             stdin().read_line(&mut choice)?;
             
-            if choice.trim().to_lowercase() != "y" {
+            if !cli.force {
+                println!("Hint: You can use --force to force overwriting to a file! (without warnings)")
+            }
+            
+            if choice.trim().to_lowercase() != "y" { // Choice isn't y
                 println!("Aborted.");
                 return Ok(());
             }
@@ -87,7 +94,7 @@ pub fn run() -> anyhow::Result<()> {
         
         let mut file = File::create(&path)?;
         write!(file, "{}", result)?;
-        println!("Saved to {}.", &path.display())
+        println!("Saved to {}.", &path.display());
     } else {
         if !result.is_empty() {
             println!("{}", result);
