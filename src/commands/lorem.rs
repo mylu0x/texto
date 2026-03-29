@@ -2,9 +2,8 @@ use anyhow::Ok;
 
 use crate::data::word_sets::WORD_SET_LOREM;
 
-pub fn run(words: usize) -> anyhow::Result<()> {
-    println!("{}", generate_lorem(words));
-    Ok(())
+pub fn run(words: usize) -> anyhow::Result<String> {
+    Ok(generate_lorem(words))
 }
 
 fn generate_lorem(words: usize) -> String {

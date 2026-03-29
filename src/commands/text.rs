@@ -7,7 +7,7 @@ pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It }
 #[derive(Debug, Clone, ValueEnum, Copy)]
 pub enum Format { Plain, Html, Json }
 
-pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format) -> anyhow::Result<()> {
+pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format) -> anyhow::Result<String> {
     let mut results: Vec<String> = Vec::with_capacity(count);
     let actual_lang = lang.unwrap_or(Lang::En);
     
@@ -21,8 +21,7 @@ pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format:
         Format::Json => format!("[{}]", results.iter().map(|item| { format!("\"{}\"", item) }).collect::<Vec<String>>().join(", "))
     };
     
-    println!("{}", result);
-    Ok(())
+    Ok(result)
 }
 
 fn generate_text(words: usize, random: bool, lang: Lang) -> String {
