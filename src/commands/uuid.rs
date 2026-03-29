@@ -11,7 +11,7 @@ pub enum Case {
     Lower, Upper
 }
 
-pub fn run(version: UuidVersion, count: usize, case: Case) -> anyhow::Result<()> {
+pub fn run(version: UuidVersion, count: usize, case: Case) -> anyhow::Result<String> {
     let results: Vec<String> = (0..count)
         .map(|_| {
             let uuid = generate_uuid(version);
@@ -22,8 +22,7 @@ pub fn run(version: UuidVersion, count: usize, case: Case) -> anyhow::Result<()>
         })
         .collect();
     
-    println!("{}", results.join("\n"));
-    Ok(())
+    Ok(results.join("\n"))
 }
 
 fn generate_uuid(version: UuidVersion) -> Uuid {
