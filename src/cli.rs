@@ -39,7 +39,10 @@ enum Commands {
         /// Number of words to generate
         #[arg(short, long, default_value_t = 19)]
         words: usize
-    }
+    },
+    
+    /// Generate UUID.
+    Uuid {}
 }
 
 pub fn run() -> anyhow::Result<()> {
@@ -47,7 +50,8 @@ pub fn run() -> anyhow::Result<()> {
     
     match &cli.command {
         Commands::Text { words, count, random, lang, format } => commands::text::run(*words, *count, *random, lang.clone(), format.clone())?,
-        Commands::Lorem { words } => commands::lorem::run(*words)?
+        Commands::Lorem { words } => commands::lorem::run(*words)?,
+        Commands::Uuid {  } => commands::uuid::run()?
     }
     
     Ok(())
