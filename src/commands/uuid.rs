@@ -6,8 +6,9 @@ pub enum UuidVersion {
     V4, V7
 }
 
-pub fn run(version: UuidVersion) -> anyhow::Result<()> {
-    println!("{}", generate_uuid(version));
+pub fn run(version: UuidVersion, count: usize) -> anyhow::Result<()> {
+    let results: Vec<String> = (0..count).map(|_| generate_uuid(version).to_string()).collect();
+    println!("{}", results.join("\n"));
     Ok(())
 }
 
