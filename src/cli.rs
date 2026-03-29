@@ -1,3 +1,6 @@
+use std::{fs::File, io::{Write, stdin, stdout}, path::PathBuf};
+
+use anyhow::Ok;
 use clap::{Parser, Subcommand};
 
 use crate::commands::{self, text::{Format, Lang}, uuid::{Case, UuidVersion}};
@@ -6,7 +9,10 @@ use crate::commands::{self, text::{Format, Lang}, uuid::{Case, UuidVersion}};
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
 struct Cli {
     #[command(subcommand)]
-    command: Commands
+    command: Commands,
+    
+    #[arg(short, long, global = true)]
+    output: Option<PathBuf>
 }
 
 #[derive(Debug, Subcommand)]
@@ -59,14 +65,33 @@ enum Commands {
 pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
-    let result = match &cli.command {
+    let result: String = match &cli.command {
         Commands::Text { words, count, random, lang, format } => commands::text::run(*words, *count, *random, *lang, *format),
         Commands::Lorem { words } => commands::lorem::run(*words),
         Commands::Uuid { version, count, case } => commands::uuid::run(*version, *count, *case)
     }?;
     
-    if !result.is_empty() {
-        println!("{}", result);
+    if let Some(path) = cli.output {        
+        if path.exists() {
+            print!("File {} already exists. Overwrite? [y/N] ", path.display());
+            stdout().flush()?;
+            
+            let mut choice = String::new();
+            stdin().read_line(&mut choice)?;
+            
+            if choice.trim().to_lowercase() != "y" {
+                println!("Aborted.");
+                return Ok(());
+            }
+        }
+        
+        let mut file = File::create(&path)?;
+        write!(file, "{}", result)?;
+        println!("Saved to {}.", &path.display())
+    } else {
+        if !result.is_empty() {
+            println!("{}", result);
+        }
     }
     
     Ok(())
