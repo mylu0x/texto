@@ -61,6 +61,20 @@ pub(crate) const WORD_SET_IT: &[&str] = &[
     "io", "voglio", "bere", "acqua", "è", "piovoso", "qui"
 ];
 
+pub(crate) const WORD_SET_ZH_CN: &[&str] = &[
+    "你好", "你", "好", "吗", "今天", "我", "是", "做", "很好",
+    "如何", "关于", "你", "这个", "是", "好", "我", "认为", "这个", "看起来", "好",
+    "让", "我们", "尝试", "什么", "新的", "什么", "是", "这个",
+    "我", "想要", "到", "喝", "水", "它", "是", "下雨", "这里"
+];
+
+pub(crate) const WORD_SET_ZH_TW: &[&str] = &[
+    "你好", "你", "好", "嗎", "今天", "我", "是", "做", "很好",
+    "如何", "關於", "你", "這個", "是", "好", "我", "認為", "這個", "看起來", "好",
+    "讓", "我們", "嘗試", "什麼", "新的", "什麼", "是", "這個",
+    "我", "想要", "到", "喝", "水", "它", "是", "下雨", "這裡"
+];
+
 pub(crate) const WORD_SET_LOREM: &[&str] = &[
     "Lorem", "ipsum", "dolor", "sit", "amet,", "consectetur", "adipiscing", "elit,", 
     "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", 

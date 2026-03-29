@@ -2,7 +2,7 @@ use clap::ValueEnum;
 use crate::data::word_sets::*;
 
 #[derive(Debug, Clone, ValueEnum, PartialEq, Copy)]
-pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It }
+pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It, ZhCn, ZhTw }
 
 #[derive(Debug, Clone, ValueEnum, Copy)]
 pub enum Format { Plain, Html, Json }
@@ -34,10 +34,15 @@ fn generate_text(words: usize, random: bool, lang: Lang) -> String {
         Lang::No => WORD_SET_NO,
         Lang::Ru => WORD_SET_RU,
         Lang::Pl => WORD_SET_PL,
-        Lang::It => WORD_SET_IT
+        Lang::It => WORD_SET_IT,
+        Lang::ZhCn => WORD_SET_ZH_CN,
+        Lang::ZhTw => WORD_SET_ZH_TW
     };
     
-    let separator = if lang == Lang::Ja { "" } else { " " };
+    let separator = match lang {
+        Lang::Ja | Lang::ZhCn | Lang::ZhTw => "",
+        _ => " "
+    };
     
     if random {
         let mut word_set_vec = Vec::from(word_set);
