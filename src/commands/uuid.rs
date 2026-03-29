@@ -6,8 +6,22 @@ pub enum UuidVersion {
     V4, V7
 }
 
-pub fn run(version: UuidVersion, count: usize) -> anyhow::Result<()> {
-    let results: Vec<String> = (0..count).map(|_| generate_uuid(version).to_string()).collect();
+#[derive(Debug, Clone, ValueEnum, PartialEq, Copy)]
+pub enum Case {
+    Lower, Upper
+}
+
+pub fn run(version: UuidVersion, count: usize, case: Case) -> anyhow::Result<()> {
+    let results: Vec<String> = (0..count)
+        .map(|_| {
+            let uuid = generate_uuid(version);
+            match case {
+                Case::Lower => format!("{:x}", uuid),
+                Case::Upper => format!("{:X}", uuid)
+            }
+        })
+        .collect();
+    
     println!("{}", results.join("\n"));
     Ok(())
 }

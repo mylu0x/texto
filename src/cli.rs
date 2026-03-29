@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
 
-use crate::commands::{self, text::{Format, Lang}, uuid::UuidVersion};
+use crate::commands::{self, text::{Format, Lang}, uuid::{Case, UuidVersion}};
 
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
@@ -48,7 +48,11 @@ enum Commands {
         
         /// Number of uuid to generate
         #[arg(short, long, default_value_t = 1)]
-        count: usize
+        count: usize,
+        
+        /// Case to generate (Upper or Lower)
+        #[arg(short = 'C', long, default_value = "lower")]
+        case: Case
     }
 }
 
@@ -58,7 +62,7 @@ pub fn run() -> anyhow::Result<()> {
     match &cli.command {
         Commands::Text { words, count, random, lang, format } => commands::text::run(*words, *count, *random, *lang, *format)?,
         Commands::Lorem { words } => commands::lorem::run(*words)?,
-        Commands::Uuid { version, count } => commands::uuid::run(*version, *count)?
+        Commands::Uuid { version, count, case } => commands::uuid::run(*version, *count, *case)?
     }
     
     Ok(())
