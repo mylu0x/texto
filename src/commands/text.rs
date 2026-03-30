@@ -2,7 +2,7 @@ use clap::ValueEnum;
 use crate::data::word_sets::*;
 
 #[derive(Debug, Clone, ValueEnum, PartialEq, Copy)]
-pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It, ZhCn, ZhTw }
+pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It, ZhCn, ZhTw, Ko, Hi }
 
 #[derive(Debug, Clone, ValueEnum, Copy)]
 pub enum Format { Plain, Html, Json }
@@ -36,7 +36,9 @@ fn generate_text(words: usize, random: bool, lang: Lang) -> String {
         Lang::Pl => WORD_SET_PL,
         Lang::It => WORD_SET_IT,
         Lang::ZhCn => WORD_SET_ZH_CN,
-        Lang::ZhTw => WORD_SET_ZH_TW
+        Lang::ZhTw => WORD_SET_ZH_TW,
+        Lang::Ko => WORD_SET_KO,
+        Lang::Hi => WORD_SET_HI
     };
     
     let separator = match lang {
