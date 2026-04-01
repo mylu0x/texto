@@ -16,7 +16,7 @@ pub enum UuidFormat {
     Hyphenated, Simple
 }
 
-pub fn run(version: UuidVersion, count: usize, case: UuidCase) -> anyhow::Result<String> {
+pub fn run(version: UuidVersion, count: usize, case: UuidCase, format: UuidFormat) -> anyhow::Result<String> {
     let results: Vec<String> = (0..count)
         .map(|_| {
             let uuid = generate_uuid(version);
