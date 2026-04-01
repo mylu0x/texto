@@ -23,7 +23,9 @@ pub fn run(version: UuidVersion, count: usize, case: UuidCase, format: UuidForma
             
             let formatted_str_uuid = match format {
                 UuidFormat::Hyphenated => uuid.as_hyphenated().to_string(),
-                UuidFormat::Simple => uuid.as_simple().to_string()
+                UuidFormat::Simple => uuid.as_simple().to_string(),
+                UuidFormat::Urn => uuid.as_urn().to_string(),
+                UuidFormat::Braced => uuid.as_braced().to_string()
             };
             
             match case {
