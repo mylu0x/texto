@@ -44,8 +44,8 @@ enum Commands {
         #[arg(short, long, default_value = "plain")]
         format: Format,
         
-        #[arg(short, long, default_value_t = ' ')]
-        separator: char
+        #[arg(short, long, default_value = " ")]
+        separator: String
     },
     
     /// Generate Lorem Ipsum.
