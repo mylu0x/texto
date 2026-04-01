@@ -3,7 +3,7 @@ use std::{fs::File, io::{Write, stdin, stdout}, path::PathBuf};
 use anyhow::Ok;
 use clap::{Parser, Subcommand};
 
-use crate::commands::{self, text::{Format, Lang}, uuid::{Case, UuidVersion}};
+use crate::commands::{self, text::{Format, Lang}, uuid::{UuidCase, UuidVersion}};
 
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
@@ -66,7 +66,11 @@ enum Commands {
         
         /// Case to generate (Upper or Lower)
         #[arg(short = 'C', long, default_value = "lower")]
-        case: Case
+        case: UuidCase,
+        
+        /// Format to generate UUIDs
+        #[arg(short, long, default_value = "hyphenated")]
+        format: UuidVersion
     }
 }
 
