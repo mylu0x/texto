@@ -20,9 +20,15 @@ pub fn run(version: UuidVersion, count: usize, case: UuidCase, format: UuidForma
     let results: Vec<String> = (0..count)
         .map(|_| {
             let uuid = generate_uuid(version);
+            
+            let formatted_str_uuid = match format {
+                UuidFormat::Hyphenated => uuid.as_hyphenated().to_string(),
+                UuidFormat::Simple => uuid.as_simple().to_string()
+            };
+            
             match case {
-                UuidCase::Lower => format!("{:x}", uuid),
-                UuidCase::Upper => format!("{:X}", uuid)
+                UuidCase::Lower => formatted_str_uuid.to_lowercase(),
+                UuidCase::Upper => formatted_str_uuid.to_uppercase()
             }
         })
         .collect();
