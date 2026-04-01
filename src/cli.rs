@@ -44,6 +44,7 @@ enum Commands {
         #[arg(short, long, default_value = "plain")]
         format: TextFormat,
         
+        /// Separator between words
         #[arg(short, long, default_value = " ")]
         separator: String
     },
