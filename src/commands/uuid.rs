@@ -13,7 +13,7 @@ pub enum UuidCase {
 
 #[derive(Debug, Clone, ValueEnum, Copy)]
 pub enum UuidFormat {
-    Hyphenated, Simple
+    Hyphenated, Simple, Urn, Braced
 }
 
 pub fn run(version: UuidVersion, count: usize, case: UuidCase, format: UuidFormat) -> anyhow::Result<String> {
