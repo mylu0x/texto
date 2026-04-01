@@ -7,12 +7,12 @@ pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It, ZhCn, ZhTw, Ko, Hi }
 #[derive(Debug, Clone, ValueEnum, Copy)]
 pub enum Format { Plain, Html, Json }
 
-pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format) -> anyhow::Result<String> {
+pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format, separator: &str) -> anyhow::Result<String> {
     let mut results: Vec<String> = Vec::with_capacity(count);
     let actual_lang = lang.unwrap_or(Lang::En);
     
     for _ in 0..count {
-        results.push(generate_text(words, random, actual_lang));
+        results.push(generate_text(words, random, actual_lang, separator));
     }
     
     let result: String = match format {
@@ -24,7 +24,7 @@ pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format:
     Ok(result)
 }
 
-fn generate_text(words: usize, random: bool, lang: Lang) -> String {
+fn generate_text(words: usize, random: bool, lang: Lang, separator: &str) -> String {
     let word_set: &[&str] = match lang {
         Lang::En => WORD_SET_EN,
         Lang::Ja => WORD_SET_JA,
@@ -43,7 +43,7 @@ fn generate_text(words: usize, random: bool, lang: Lang) -> String {
     
     let separator = match lang {
         Lang::Ja | Lang::ZhCn | Lang::ZhTw => "",
-        _ => " "
+        _ => separator
     };
     
     if random {

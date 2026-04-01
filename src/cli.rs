@@ -42,7 +42,10 @@ enum Commands {
         
         /// Format to generate
         #[arg(short, long, default_value = "plain")]
-        format: Format
+        format: Format,
+        
+        #[arg(short, long, default_value = " ")]
+        separator: String
     },
     
     /// Generate Lorem Ipsum.
@@ -71,7 +74,7 @@ pub fn run() -> anyhow::Result<()> {
     let cli = Cli::parse();
     
     let result: String = match &cli.command {
-        Commands::Text { words, count, random, lang, format } => commands::text::run(*words, *count, *random, *lang, *format),
+        Commands::Text { words, count, random, lang, format, separator } => commands::text::run(*words, *count, *random, *lang, *format, separator),
         Commands::Lorem { words } => commands::lorem::run(*words),
         Commands::Uuid { version, count, case } => commands::uuid::run(*version, *count, *case)
     }?;
