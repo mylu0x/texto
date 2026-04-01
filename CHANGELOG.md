@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.4.0
+
+### Added
+
+- [#12](https://github.com/mylu0x/texto/pull/12): Add new 4 languages to the `text` command
+- [#13](https://github.com/mylu0x/texto/pull/13): Add `--separator` / `-s` arg to the `text` command for a separator between words
+- [#14](https://github.com/mylu0x/texto/pull/14): Add `format` arg feature to the `uuid` command
+
 ## 0.3.0
 
 ### Added
