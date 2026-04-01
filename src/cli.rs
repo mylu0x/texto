@@ -3,7 +3,7 @@ use std::{fs::File, io::{Write, stdin, stdout}, path::PathBuf};
 use anyhow::Ok;
 use clap::{Parser, Subcommand};
 
-use crate::commands::{self, text::{Format, Lang}, uuid::{UuidCase, UuidVersion}};
+use crate::commands::{self, text::{TextFormat, Lang}, uuid::{UuidCase, UuidVersion}};
 
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
@@ -42,7 +42,7 @@ enum Commands {
         
         /// Format to generate
         #[arg(short, long, default_value = "plain")]
-        format: Format,
+        format: TextFormat,
         
         #[arg(short, long, default_value = " ")]
         separator: String
