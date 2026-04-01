@@ -31,6 +31,9 @@ texto text -w 100 -c 3
 # Generate an array with strings in JSON format
 texto text -f json -c 2
 
+# Generate words with a separator
+texto text -s ","
+
 # Generate Lorem Ipsum
 texto lorem
 
@@ -45,6 +48,9 @@ texto uuid -v v7
 
 # Save 10 UUIDs to uuids.txt
 texto uuid -c 10 -o "uuids.txt"
+
+# Generate a UUID with hyphen
+texto uuid -f hyphenated
 ```
 
 ## License
