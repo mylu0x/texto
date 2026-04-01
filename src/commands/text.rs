@@ -5,9 +5,9 @@ use crate::data::word_sets::*;
 pub enum Lang { En, Ja, De, Fr, Es, No, Ru, Pl, It, ZhCn, ZhTw, Ko, Hi }
 
 #[derive(Debug, Clone, ValueEnum, Copy)]
-pub enum Format { Plain, Html, Json }
+pub enum TextFormat { Plain, Html, Json }
 
-pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: Format, separator: &str) -> anyhow::Result<String> {
+pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format: TextFormat, separator: &str) -> anyhow::Result<String> {
     let mut results: Vec<String> = Vec::with_capacity(count);
     let actual_lang = lang.unwrap_or(Lang::En);
     
@@ -16,9 +16,9 @@ pub fn run(words: usize, count: usize, random: bool, lang: Option<Lang>, format:
     }
     
     let result: String = match format {
-        Format::Plain => results.join("\n\n"),
-        Format::Html => results.iter().map(|item| { format!("<p>{}</p>", item) }).collect::<Vec<String>>().join("\n\n"),
-        Format::Json => format!("[{}]", results.iter().map(|item| { format!("\"{}\"", item) }).collect::<Vec<String>>().join(", "))
+        TextFormat::Plain => results.join("\n\n"),
+        TextFormat::Html => results.iter().map(|item| { format!("<p>{}</p>", item) }).collect::<Vec<String>>().join("\n\n"),
+        TextFormat::Json => format!("[{}]", results.iter().map(|item| { format!("\"{}\"", item) }).collect::<Vec<String>>().join(", "))
     };
     
     Ok(result)
