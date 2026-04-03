@@ -72,7 +72,10 @@ enum Commands {
         /// Format to generate UUIDs
         #[arg(short, long, default_value = "hyphenated")]
         format: UuidFormat
-    }
+    },
+    
+    /// Generate random number.
+    Number {}
 }
 
 pub fn run() -> anyhow::Result<()> {
@@ -81,7 +84,8 @@ pub fn run() -> anyhow::Result<()> {
     let result: String = match &cli.command {
         Commands::Text { words, count, random, lang, format, separator } => commands::text::run(*words, *count, *random, *lang, *format, separator),
         Commands::Lorem { words } => commands::lorem::run(*words),
-        Commands::Uuid { version, count, case, format } => commands::uuid::run(*version, *count, *case, *format)
+        Commands::Uuid { version, count, case, format } => commands::uuid::run(*version, *count, *case, *format),
+        Commands::Number {  } => commands::number::run()
     }?;
     
     if let Some(path) = cli.output {        
