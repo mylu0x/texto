@@ -75,7 +75,13 @@ enum Commands {
     },
     
     /// Generate random number.
-    Number {}
+    Number {
+        #[arg(short, long, default_value_t = 0)]
+        min: isize,
+        
+        #[arg(short = 'M' , long, default_value_t = 100)]
+        max: isize
+    }
 }
 
 pub fn run() -> anyhow::Result<()> {
@@ -85,7 +91,7 @@ pub fn run() -> anyhow::Result<()> {
         Commands::Text { words, count, random, lang, format, separator } => commands::text::run(*words, *count, *random, *lang, *format, separator),
         Commands::Lorem { words } => commands::lorem::run(*words),
         Commands::Uuid { version, count, case, format } => commands::uuid::run(*version, *count, *case, *format),
-        Commands::Number {  } => commands::number::run()
+        Commands::Number { min, max } => commands::number::run(*min, *max)
     }?;
     
     if let Some(path) = cli.output {        
