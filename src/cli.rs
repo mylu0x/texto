@@ -80,7 +80,10 @@ enum Commands {
         min: isize,
         
         #[arg(short = 'M' , long, default_value_t = 100)]
-        max: isize
+        max: isize,
+        
+        #[arg(short, long, default_value_t = 1)]
+        count: usize
     }
 }
 
@@ -91,7 +94,7 @@ pub fn run() -> anyhow::Result<()> {
         Commands::Text { words, count, random, lang, format, separator } => commands::text::run(*words, *count, *random, *lang, *format, separator),
         Commands::Lorem { words } => commands::lorem::run(*words),
         Commands::Uuid { version, count, case, format } => commands::uuid::run(*version, *count, *case, *format),
-        Commands::Number { min, max } => commands::number::run(*min, *max)
+        Commands::Number { min, max, count } => commands::number::run(*min, *max, *count)
     }?;
     
     if let Some(path) = cli.output {        
