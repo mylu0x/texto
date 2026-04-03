@@ -3,7 +3,7 @@ use std::{fs::File, io::{Write, stdin, stdout}, path::PathBuf};
 use anyhow::Ok;
 use clap::{Parser, Subcommand};
 
-use crate::commands::{self, number::NumberFormat, text::{Lang, TextFormat}, uuid::{UuidCase, UuidFormat, UuidVersion}};
+use crate::commands::{self, decimal::NumberFormat, text::{Lang, TextFormat}, uuid::{UuidCase, UuidFormat, UuidVersion}};
 
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
@@ -74,8 +74,8 @@ enum Commands {
         format: UuidFormat
     },
     
-    /// Generate random number.
-    Number {
+    /// Generate random decimal number.
+    Decimal {
         /// Minimum value for the random numbers
         #[arg(short, long, default_value_t = 0)]
         min: isize,
@@ -101,7 +101,7 @@ pub fn run() -> anyhow::Result<()> {
         Commands::Text { words, count, random, lang, format, separator } => commands::text::run(*words, *count, *random, *lang, *format, separator),
         Commands::Lorem { words } => commands::lorem::run(*words),
         Commands::Uuid { version, count, case, format } => commands::uuid::run(*version, *count, *case, *format),
-        Commands::Number { min, max, count, format } => commands::number::run(*min, *max, *count, *format)
+        Commands::Decimal { min, max, count, format } => commands::decimal::run(*min, *max, *count, *format)
     }?;
     
     if let Some(path) = cli.output {        
