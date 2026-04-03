@@ -76,15 +76,19 @@ enum Commands {
     
     /// Generate random number.
     Number {
+        /// Minimum value for the random numbers
         #[arg(short, long, default_value_t = 0)]
         min: isize,
         
+        /// Minimum value for the random numbers
         #[arg(short = 'M' , long, default_value_t = 100)]
         max: isize,
         
+        /// Number of random numbers to generate
         #[arg(short, long, default_value_t = 1)]
         count: usize,
         
+        /// Format to generate numbers
         #[arg(short, long, default_value = "plain")]
         format: NumberFormat
     }
