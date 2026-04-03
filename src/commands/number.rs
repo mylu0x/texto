@@ -13,7 +13,12 @@ pub fn run(min: isize, max: isize, count: usize, format: NumberFormat) -> anyhow
         result.push(fastrand::isize(clear_min..=clear_max));
     }
     
-    let joined_result: String = result.iter().map(|num| format!("{} ", num)).collect();
+    let result_vec = result.iter().map(|num| format!("{}", num)).collect::<Vec<_>>();
+    
+    let joined_result = match format {
+        NumberFormat::Plain => result_vec.join(" "),
+        NumberFormat::Json => format!("[{}]", result_vec.join(","))
+    };
     
     Ok(joined_result)
 }
