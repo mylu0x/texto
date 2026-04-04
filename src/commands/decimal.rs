@@ -1,11 +1,11 @@
 use clap::ValueEnum;
 
 #[derive(Debug, Clone, ValueEnum, Copy)]
-pub enum NumberFormat {
+pub enum DecimalFormat {
     Plain, Json
 }
 
-pub fn run(min: isize, max: isize, count: usize, format: NumberFormat) -> anyhow::Result<String> {
+pub fn run(min: isize, max: isize, count: usize, format: DecimalFormat) -> anyhow::Result<String> {
     let (clear_min, clear_max) = if min <= max { (min, max) } else { (max, min) };
     let mut result: Vec<isize> = Vec::with_capacity(count);
     
@@ -16,8 +16,8 @@ pub fn run(min: isize, max: isize, count: usize, format: NumberFormat) -> anyhow
     let result_vec = result.iter().map(|num| format!("{}", num)).collect::<Vec<_>>();
     
     let joined_result = match format {
-        NumberFormat::Plain => result_vec.join(" "),
-        NumberFormat::Json => format!("[{}]", result_vec.join(","))
+        DecimalFormat::Plain => result_vec.join(" "),
+        DecimalFormat::Json => format!("[{}]", result_vec.join(","))
     };
     
     Ok(joined_result)
