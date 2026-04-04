@@ -3,7 +3,7 @@ use std::{fs::File, io::{Write, stdin, stdout}, path::PathBuf};
 use anyhow::Ok;
 use clap::{Parser, Subcommand};
 
-use crate::commands::{self, decimal::NumberFormat, text::{Lang, TextFormat}, uuid::{UuidCase, UuidFormat, UuidVersion}};
+use crate::commands::{self, decimal::DecimalFormat, text::{Lang, TextFormat}, uuid::{UuidCase, UuidFormat, UuidVersion}};
 
 #[derive(Debug, Parser)]
 #[command(version, about = env!("CARGO_PKG_DESCRIPTION"))]
@@ -90,7 +90,7 @@ enum Commands {
         
         /// Format to generate numbers
         #[arg(short, long, default_value = "plain")]
-        format: NumberFormat
+        format: DecimalFormat
     }
 }
 
